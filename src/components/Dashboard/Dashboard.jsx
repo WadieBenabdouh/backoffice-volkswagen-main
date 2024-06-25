@@ -7,7 +7,7 @@ import LeadsDashboard from "../pages//Leads/LeadsDashboard";
 import { useState } from "react";
 
 function Dashboard() {
-  // TOGGLE PAGES APPEARANCE USIN useState hook
+  // TOGGLE PAGES APPEARANCE USING useState Hook.
   const [currentView, setCurrentView] = useState("Medias");
 
   const renderView = () => {
@@ -24,6 +24,7 @@ function Dashboard() {
         return <MediasDashboard />;
     }
   };
+  // TOGGLE PAGES APPEARANCE USING useState Hook.
 
   return (
     <>
