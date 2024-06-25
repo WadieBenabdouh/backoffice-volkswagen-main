@@ -1,12 +1,46 @@
 /* COLOR VARIABLES */
 $dark-blue: #0B1423;
 
-header{
+// HEADER
+header {
     background-color: $dark-blue;
     padding: 1em 2em;
 
-    h1{
+    h1 {
         color: #fff;
         text-align: center;
     }
 }
+
+// HEADER END
+
+
+// MAIN
+main {
+    // display: flex;
+
+    .sidebar {
+        background-color: $dark-blue;
+        padding: 1em 2em;
+
+        nav {
+
+            ul {
+                display: flex;
+                flex-direction: column;
+                gap: 3em;
+
+                li {
+
+                    a {
+                        color: #fff;
+                        font-weight: bold;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MAIN END

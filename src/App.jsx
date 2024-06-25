@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.module.scss";
 
 // imports
 import Dashboard from "./components/Dashboard/Dashboard";
