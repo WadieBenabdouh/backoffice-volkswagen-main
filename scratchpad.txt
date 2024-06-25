@@ -1,0 +1,217 @@
+TODO 1 - As of now, forms can be logged successfully however upon switching tabs or refreshing, the data vanishes.
+
+Potential solution:
+
+
+
+
+
+
+---------------------------------------
+
+Yes, you can integrate Firebase to store the form data in its database while also keeping it intact and synchronized with your React application. Firebase provides a real-time database and other services that can be seamlessly integrated with React to handle data storage and synchronization across multiple clients.
+
+Here’s how you can integrate Firebase into your existing React application to store form data:
+
+### Setting up Firebase in your React App
+
+1. **Install Firebase SDK**:
+   First, you need to install Firebase SDK in your React project. You can do this via npm or yarn.
+
+   ```bash
+   npm install firebase
+   # or
+   yarn add firebase
+   ```
+
+2. **Configure Firebase in your Application**:
+   Set up Firebase in your main application file (e.g., `App.js` or `index.js`).
+
+   ```javascript
+   import firebase from 'firebase/app';
+   import 'firebase/database'; // If you're using Firebase Realtime Database
+
+   const firebaseConfig = {
+     apiKey: 'YOUR_API_KEY',
+     authDomain: 'YOUR_AUTH_DOMAIN',
+     databaseURL: 'YOUR_DATABASE_URL',
+     projectId: 'YOUR_PROJECT_ID',
+     storageBucket: 'YOUR_STORAGE_BUCKET',
+     messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+     appId: 'YOUR_APP_ID'
+   };
+
+   // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+   ```
+
+   Replace `'YOUR_API_KEY'`, `'YOUR_AUTH_DOMAIN'`, etc., with your Firebase project credentials. You can find these credentials in your Firebase project settings.
+
+### Storing Form Data in Firebase
+
+Modify your form submission logic to store data in Firebase:
+
+```jsx
+import React, { useState, useContext } from 'react';
+import firebase from 'firebase/app';
+import 'firebase/database';
+import DataContext from './DataContext';
+import classes from './MediasDashboard.module.scss';
+
+function MediasDashboard() {
+  const { formData, setFormData } = useContext(DataContext);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [tableData, setTableData] = useState([]);
+
+  const handleAddContentClick = (e) => {
+    e.preventDefault();
+    setIsFormVisible(!isFormVisible);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    // Save to Firebase
+    const database = firebase.database();
+    database.ref('medias').push(formData); // 'medias' can be your collection name
+
+    setTableData((prevData) => [...prevData, formData]);
+    setFormData({
+      modelID: '',
+      modelName: '',
+      urlOne: '',
+      urlTwo: '',
+      urlThree: '',
+      urlBrochure: ''
+    });
+    setIsFormVisible(false);
+  };
+
+  return (
+    <>
+      <section className={classes.MediasDashboard}>
+        <h2>Médias</h2>
+
+        <form onSubmit={handleFormSubmit}>
+          <div className={classes.buttons}>
+            <button onClick={handleAddContentClick}>Ajouter contenu</button>
+            <button type="button">Modifier</button>
+            <button type="button">Supprimer</button>
+          </div>
+
+          {isFormVisible && (
+            <section className={classes.formCard}>
+              <h3>Ajouter un média</h3>
+
+              <label htmlFor="ModelID">ID Modèle:</label>
+              <input
+                type="text"
+                id="ModelID"
+                name="modelID"
+                value={formData.modelID}
+                onChange={handleInputChange}
+              />
+
+              <label htmlFor="ModelName">Nom du Modèle:</label>
+              <input
+                type="text"
+                id="ModelName"
+                name="modelName"
+                value={formData.modelName}
+                onChange={handleInputChange}
+              />
+
+              <label htmlFor="urlOne">URL Image 1:</label>
+              <input
+                type="text"
+                id="URL-one"
+                name="urlOne"
+                value={formData.urlOne}
+                onChange={handleInputChange}
+              />
+
+              <label htmlFor="urlTwo">URL Image 2:</label>
+              <input
+                type="text"
+                id="URL-two"
+                name="urlTwo"
+                value={formData.urlTwo}
+                onChange={handleInputChange}
+              />
+
+              <label htmlFor="urlThree">URL Image 3:</label>
+              <input
+                type="text"
+                id="URL-three"
+                name="urlThree"
+                value={formData.urlThree}
+                onChange={handleInputChange}
+              />
+
+              <label htmlFor="urlBrochure">URL Brochure:</label>
+              <input
+                type="text"
+                id="URL-brochure"
+                name="urlBrochure"
+                value={formData.urlBrochure}
+                onChange={handleInputChange}
+              />
+
+              <button type="submit">Enregistrer</button>
+            </section>
+          )}
+
+          <table>
+            <thead>
+              <tr>
+                <th>ID Modèle</th>
+                <th>Nom du Modèle</th>
+                <th>URL Image 1</th>
+                <th>URL Image 2</th>
+                <th>URL Image 3</th>
+                <th>URL Brochure</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="mediasfilledDataTable">
+              {tableData.map((data, index) => (
+                <tr key={index}>
+                  <td>{data.modelID}</td>
+                  <td>{data.modelName}</td>
+                  <td>{data.urlOne}</td>
+                  <td>{data.urlTwo}</td>
+                  <td>{data.urlThree}</td>
+                  <td>{data.urlBrochure}</td>
+                  <td>ACTION BUTTON</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </form>
+      </section>
+    </>
+  );
+}
+
+export default MediasDashboard;
+```
+
+### Explanation
+
+- **Firebase Database Integration**: Firebase Realtime Database (`firebase.database()`) is used to store form data. In the `handleFormSubmit` function, after setting the form data to the local state (`setTableData`), the data is then pushed to the Firebase database under the `medias` collection.
+
+- **Collection Name**: You can replace `'medias'` with a different collection name (`'commerciaux'`, `'campagnes'`, etc.) depending on which dashboard you're implementing.
+
+- **Data Persistence**: Once stored in Firebase, the data will persist across sessions and can be accessed and updated in real-time by your React application.
+
+By integrating Firebase this way, you ensure that your form data is securely stored and can be accessed from anywhere while maintaining the integrity of data between different tabs and components within your React application. This approach leverages Firebase's real-time capabilities to keep your application data synchronized and consistent.
+---------------------------------------

@@ -10,12 +10,43 @@ function CommerciauxDashboard() {
   };
   // TOGGLE formCard visibility form Commerciaux END
 
+  // formCard inputs logging
+  const [formData, setFormData] = useState({
+    city: "",
+    concession: "",
+    lastName: "",
+    firstName: "",
+    mailChef: "",
+  });
+  const [tableData, setTableData] = useState([]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setTableData((prevData) => [...prevData, formData]);
+    setFormData({
+      city: "",
+      concession: "",
+      lastName: "",
+      firstName: "",
+      mailChef: "",
+    });
+  };
+  // formCard inputs logging END
+
   return (
     <>
       <section className={`${classes.CommerciauxDashboard}`}>
         <h2>Commerciaux</h2>
 
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div className={`${classes.buttons}`}>
             <button onClick={handleAddContentClick}>Ajouter contenu</button>
             <button>Modifier</button>
@@ -27,19 +58,49 @@ function CommerciauxDashboard() {
               <h3>Ajouter un commercial</h3>
 
               <label htmlFor="city">Villes:</label>
-              <input type="text" />
+              <input
+                id="city"
+                name="city"
+                value={formData.city}
+                onChange={handleInputChange}
+                type="text"
+              />
 
               <label htmlFor="concession">Concession:</label>
-              <input type="text" />
+              <input
+                id="concessions"
+                name="concession"
+                value={formData.concession}
+                onChange={handleInputChange}
+                type="text"
+              />
 
               <label htmlFor="lastName">Nom:</label>
-              <input type="text" />
+              <input
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                type="text"
+              />
 
               <label htmlFor="firstName">Prénom:</label>
-              <input type="text" />
+              <input
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                type="text"
+              />
 
               <label htmlFor="mailChef">Mail Chef de Ventes:</label>
-              <input type="text" />
+              <input
+                id="mailChef"
+                name="mailChef"
+                value={formData.mailChef}
+                onChange={handleInputChange}
+                type="email"
+              />
 
               <button type="submit">Enregistrer</button>
             </section>
@@ -58,14 +119,16 @@ function CommerciauxDashboard() {
             </thead>
 
             <tbody id="commerciauxfilledDataTable">
-              <tr>
-                <th>test</th>
-                <th>test</th>
-                <th>test</th>
-                <th>test</th>
-                <th>test</th>
-                <th>ACTION BUTTON</th>
-              </tr>
+              {tableData.map((data, index) => (
+                <tr key={{ index }}>
+                  <td>{data.city}</td>
+                  <td>{data.concession}</td>
+                  <td>{data.lastName}</td>
+                  <td>{data.firstName}</td>
+                  <td>{data.mailChef}</td>
+                  <th>ACTION BUTTON</th>
+                </tr>
+              ))}
             </tbody>
           </table>
         </form>
