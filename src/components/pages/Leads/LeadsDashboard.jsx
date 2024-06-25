@@ -53,7 +53,7 @@ function LeadsDashboard() {
               </tr>
             </thead>
 
-            <tbody id="commerciaux-filledDataTable">
+            <tbody id="leadsfilledDataTable">
               <tr>
                 <th>test</th>
                 <th>test</th>
