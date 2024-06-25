@@ -50,7 +50,7 @@ function MediasDashboard() {
               </tr>
             </thead>
 
-            <tbody id="filledDataTable">
+            <tbody id="mediasfilledDataTable">
               <tr>
                 <th>test</th>
                 <th>test</th>

@@ -1,5 +1,6 @@
 import classes from "./Dashboard.module.scss";
 import MediasDashboard from "../pages/Medias/MediaDasboard";
+import CommerciauxDashboard from "../pages/Commerciaux/CommerciauxDashboard";
 
 function Dashboard() {
   return (
@@ -36,7 +37,8 @@ function Dashboard() {
 
         {/* SELECTED PAGE AS COMPONENT- 4/4*/}
         <section className={`${classes.rightPanel}`}>
-          <MediasDashboard />
+          {/* <MediasDashboard /> */}
+          <CommerciauxDashboard />
         </section>
 
         {/* SELECTED PAGE AS COMPONENT - 4/4 END*/}
