@@ -4,7 +4,7 @@ function CampagnesDashboard() {
   return (
     <>
       <section className={`${classes.CampagnesDashboard}`}>
-        <h2>Commerciaux</h2>
+        <h2>Campagnes</h2>
 
         <form>
           <div className={`${classes.buttons}`}>
@@ -34,18 +34,16 @@ function CampagnesDashboard() {
           <table>
             <thead>
               <tr>
-                <th>Villes</th>
-                <th>Concession</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Mail Chef de Ventes</th>
+                <th>ID Campagne</th>
+                <th>Date de Début</th>
+                <th>Date de Fin</th>
+                <th>URL Image</th>
                 <th>Actions</th>
               </tr>
             </thead>
 
             <tbody id="commerciaux-filledDataTable">
               <tr>
-                <th>test</th>
                 <th>test</th>
                 <th>test</th>
                 <th>test</th>
