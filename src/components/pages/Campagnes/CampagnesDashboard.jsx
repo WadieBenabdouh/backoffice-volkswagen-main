@@ -1,6 +1,15 @@
 import classes from "./CampagnesDashboard.module.scss";
+import { useState } from "react";
 
 function CampagnesDashboard() {
+  // TOGGLE formCard visibility form Campagnes
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const handleAddContentClick = (e) => {
+    e.preventDefault();
+    setIsFormVisible(!isFormVisible);
+  };
+  // TOGGLE formCard visibility form Campagnes END
+
   return (
     <>
       <section className={`${classes.CampagnesDashboard}`}>
@@ -8,28 +17,30 @@ function CampagnesDashboard() {
 
         <form>
           <div className={`${classes.buttons}`}>
-            <button>Ajouter contenu</button>
+            <button onClick={handleAddContentClick}>Ajouter contenu</button>
             <button>Modifier</button>
             <button>Supprimer</button>
           </div>
 
-          <section className={`${classes.formCard}`}>
-            <h3>Ajouter une campagne</h3>
+          {isFormVisible && (
+            <section className={`${classes.formCard}`}>
+              <h3>Ajouter une campagne</h3>
 
-            <label htmlFor="ID-Campagne">ID Campagne:</label>
-            <input type="text" />
+              <label htmlFor="ID-Campagne">ID Campagne:</label>
+              <input type="text" />
 
-            <label htmlFor="startDate">Date de Début:</label>
-            <input type="date" />
+              <label htmlFor="startDate">Date de Début:</label>
+              <input type="date" />
 
-            <label htmlFor="endDate">Date de Fin::</label>
-            <input type="date" />
+              <label htmlFor="endDate">Date de Fin::</label>
+              <input type="date" />
 
-            <label htmlFor="url-image">URL Image:</label>
-            <input type="text" />
+              <label htmlFor="url-image">URL Image:</label>
+              <input type="text" />
 
-            <button type="submit">Enregistrer</button>
-          </section>
+              <button type="submit">Enregistrer</button>
+            </section>
+          )}
 
           <table>
             <thead>

@@ -1,6 +1,17 @@
 import classes from "./MediasDashboard.module.scss";
 
+import { useState } from "react";
+
 function MediasDashboard() {
+
+  // TOGGLE formCard visibility form Medias
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const handleAddContentClick = (e) => {
+    e.preventDefault();
+    setIsFormVisible(!isFormVisible);
+  };
+  // TOGGLE formCard visibility form Medias END
+
   return (
     <>
       <section className={`${classes.MediasDashboard}`}>
@@ -8,34 +19,36 @@ function MediasDashboard() {
 
         <form>
           <div className={`${classes.buttons}`}>
-            <button>Ajouter contenu</button>
+            <button onClick={handleAddContentClick}>Ajouter contenu</button>
             <button>Modifier</button>
             <button>Supprimer</button>
           </div>
 
-          <section className={`${classes.formCard}`}>
-            <h3>Ajouter un média</h3>
+          {isFormVisible && (
+            <section className={`${classes.formCard}`}>
+              <h3>Ajouter un média</h3>
 
-            <label htmlFor="ModelID">ID Modèle:</label>
-            <input type="text" />
+              <label htmlFor="ModelID">ID Modèle:</label>
+              <input type="text" />
 
-            <label htmlFor="ModelName">Nom du Modèle:</label>
-            <input type="text" />
+              <label htmlFor="ModelName">Nom du Modèle:</label>
+              <input type="text" />
 
-            <label htmlFor="URL-one">URL Image 1:</label>
-            <input type="text" />
+              <label htmlFor="URL-one">URL Image 1:</label>
+              <input type="text" />
 
-            <label htmlFor="URL-two">URL Image 2:</label>
-            <input type="text" />
+              <label htmlFor="URL-two">URL Image 2:</label>
+              <input type="text" />
 
-            <label htmlFor="URL-three">URL Image 3:</label>
-            <input type="text" />
+              <label htmlFor="URL-three">URL Image 3:</label>
+              <input type="text" />
 
-            <label htmlFor="URL-brochure">URL Brochure:</label>
-            <input type="text" />
+              <label htmlFor="URL-brochure">URL Brochure:</label>
+              <input type="text" />
 
-            <button type="submit">Enregistrer</button>
-          </section>
+              <button type="submit">Enregistrer</button>
+            </section>
+          )}
 
           <table>
             <thead>
