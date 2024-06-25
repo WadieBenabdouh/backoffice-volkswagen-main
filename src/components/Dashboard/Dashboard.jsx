@@ -46,9 +46,8 @@ function Dashboard() {
           {/* <MediasDashboard /> */}
           {/* <CommerciauxDashboard /> */}
           {/* <CampagnesDashboard /> */}
-          <LeadsDashboard/>
+          {/* <LeadsDashboard/> */}
         </section>
-
         {/* SELECTED PAGE AS COMPONENT - 4/4 END*/}
       </main>
     </>

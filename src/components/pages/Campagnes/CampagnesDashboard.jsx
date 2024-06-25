@@ -20,10 +20,10 @@ function CampagnesDashboard() {
             <input type="text" />
 
             <label htmlFor="startDate">Date de Début:</label>
-            <input type="text" />
+            <input type="date" />
 
             <label htmlFor="endDate">Date de Fin::</label>
-            <input type="text" />
+            <input type="date" />
 
             <label htmlFor="url-image">URL Image:</label>
             <input type="text" />
