@@ -171,7 +171,8 @@ function CommerciauxDashboard() {
                   <td>{data.firstName}</td>
                   <td>{data.mailChef}</td>
                   <th>
-                    <i className="fa-solid fa-circle-dot"></i>
+                    <i className="fa-solid fa-pencil"></i>
+                    <i className="fa-solid fa-trash"></i>
                   </th>
                 </tr>
               ))}

@@ -150,7 +150,8 @@ function CampagnesDashboard() {
                   <td>{data.endDate}</td>
                   <td>{data.urlImageCampagne}</td>
                   <th>
-                    <i className="fa-solid fa-circle-dot"></i>
+                    <i className="fa-solid fa-pencil"></i>
+                    <i className="fa-solid fa-trash"></i>
                   </th>
                 </tr>
               ))}
