@@ -1,5 +1,8 @@
 import classes from "./MediasDashboard.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+// FIREBASE x FIRESTORE IMPORTS
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import firestore from "../../../../firebase";
 
 function MediasDashboard() {
   // TOGGLE formCard visibility form Medias
@@ -21,6 +24,18 @@ function MediasDashboard() {
   });
   const [tableData, setTableData] = useState([]);
 
+  // --useEffect for firestore
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(firestore, "medias"));
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setTableData(data);
+    };
+    fetchData();
+  }, []);
+
+  // --useEffect for firestore end
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -29,17 +44,24 @@ function MediasDashboard() {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setTableData((prevData) => [...prevData, formData]);
-    setFormData({
-      modelID: "",
-      modelName: "",
-      urlOne: "",
-      urlTwo: "",
-      urlThree: "",
-      urlBrochure: "",
-    });
+    try {
+      await addDoc(collection(firestore, "medias"), formData);
+      setFormData({
+        modelID: "",
+        modelName: "",
+        urlOne: "",
+        urlTwo: "",
+        urlThree: "",
+        urlBrochure: "",
+      });
+
+      const querySnapshot = await getDocs(collection(firestore, "medias"));
+      setTableData(querySnapshot.docs.map((doc) => doc.data()));
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   };
   // formCard inputs logging END
 
