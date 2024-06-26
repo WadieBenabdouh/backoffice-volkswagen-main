@@ -20,3 +20,6 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firestore
 const firestore = getFirestore(app);
 export default firestore;
+
+
+// NOTE : STARTING FROM THIS COMMIT, THINGS GOING TO GET SERIOUS
