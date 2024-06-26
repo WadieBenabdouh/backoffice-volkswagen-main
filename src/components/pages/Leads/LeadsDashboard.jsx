@@ -1,5 +1,8 @@
 import classes from "./LeadsDashboard.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+// FIREBASE x FIRESTORE IMPORTS
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import firestore from "../../../../firebase";
 
 function LeadsDashboard() {
   // TOGGLE formCard visibility form Leads
@@ -15,9 +18,21 @@ function LeadsDashboard() {
     phoneNumber: "",
     lastNameLeads: "",
     firstNameLeads: "",
-    desiredModel: "",
+    desiredModel: ""
   });
   const [tableData, setTableData] = useState([]);
+
+  // --useEffect for firestore
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(firestore, "leads"));
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setTableData(data);
+    };
+    fetchData();
+  }, []);
+
+  // --useEffect for firestore end
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -27,15 +42,22 @@ function LeadsDashboard() {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setTableData((prevData) => [...prevData, formData]);
-    setFormData({
-      phoneNumber: "",
-      lastNameLeads: "",
-      firstNameLeads: "",
-      desiredModel: "",
-    });
+    try {
+      await addDoc(collection(firestore, "leads"), formData);
+      setFormData({
+        phoneNumber: "",
+        lastNameLeads: "",
+        firstNameLeads: "",
+        desiredModel: ""
+      });
+
+      const querySnapshot = await getDocs(collection(firestore, "leads"));
+      setTableData(querySnapshot.docs.map((doc) => doc.data()));
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   };
   // formCard inputs logging END
 

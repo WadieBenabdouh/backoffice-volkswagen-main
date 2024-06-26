@@ -1,5 +1,8 @@
 import classes from "./Commerciaux.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+// FIREBASE x FIRESTORE IMPORTS
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import firestore from "../../../../firebase";
 
 function CommerciauxDashboard() {
   // TOGGLE formCard visibility form Commerciaux
@@ -20,6 +23,18 @@ function CommerciauxDashboard() {
   });
   const [tableData, setTableData] = useState([]);
 
+  // --useEffect for firestore
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(firestore, "commerciaux"));
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setTableData(data);
+    };
+    fetchData();
+  }, []);
+
+  // --useEffect for firestore end
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -28,15 +43,30 @@ function CommerciauxDashboard() {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await addDoc(collection(firestore, "commerciaux"), formData);
+      setFormData({
+        city: "",
+        concession: "",
+        lastName: "",
+        firstName: "",
+        mailChef: ""
+      });
+
+      const querySnapshot = await getDocs(collection(firestore, "commerciaux"));
+      setTableData(querySnapshot.docs.map((doc) => doc.data()));
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
     setTableData((prevData) => [...prevData, formData]);
     setFormData({
       city: "",
       concession: "",
       lastName: "",
       firstName: "",
-      mailChef: "",
+      mailChef: ""
     });
   };
   // formCard inputs logging END

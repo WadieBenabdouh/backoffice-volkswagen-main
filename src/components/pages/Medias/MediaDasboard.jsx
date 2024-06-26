@@ -20,7 +20,7 @@ function MediasDashboard() {
     urlOne: "",
     urlTwo: "",
     urlThree: "",
-    urlBrochure: "",
+    urlBrochure: ""
   });
   const [tableData, setTableData] = useState([]);
 
@@ -54,7 +54,7 @@ function MediasDashboard() {
         urlOne: "",
         urlTwo: "",
         urlThree: "",
-        urlBrochure: "",
+        urlBrochure: ""
       });
 
       const querySnapshot = await getDocs(collection(firestore, "medias"));

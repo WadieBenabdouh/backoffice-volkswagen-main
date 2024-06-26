@@ -1,5 +1,8 @@
 import classes from "./CampagnesDashboard.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+// FIREBASE x FIRESTORE IMPORTS
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import firestore from "../../../../firebase";
 
 function CampagnesDashboard() {
   // TOGGLE formCard visibility form Campagnes
@@ -19,6 +22,18 @@ function CampagnesDashboard() {
   });
   const [tableData, setTableData] = useState([]);
 
+  // --useEffect for firestore
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(firestore, "campagnes"));
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setTableData(data);
+    };
+    fetchData();
+  }, []);
+
+  // --useEffect for firestore end
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -27,15 +42,22 @@ function CampagnesDashboard() {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setTableData((prevData) => [...prevData, formData]);
-    setFormData({
-      campagneID: "",
-      startDate: "",
-      endDate: "",
-      urlImageCampagne: "",
-    });
+    try {
+      await addDoc(collection(firestore, "campagnes"), formData);
+      setFormData({
+        campagneID: "",
+        startDate: "",
+        endDate: "",
+        urlImageCampagne: "",
+      });
+
+      const querySnapshot = await getDocs(collection(firestore, "campagnes"));
+      setTableData(querySnapshot.docs.map((doc) => doc.data()));
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   };
   // formCard inputs logging END
 
