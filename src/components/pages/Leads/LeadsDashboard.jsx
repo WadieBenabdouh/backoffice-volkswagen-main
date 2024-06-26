@@ -149,7 +149,7 @@ function LeadsDashboard() {
                   <td>{data.lastNameLeads}</td>
                   <td>{data.firstNameLeads}</td>
                   <td>{data.desiredModel}</td>
-                  <th>ACTION BUTTON</th>
+                  <th><i className="fa-solid fa-circle-dot"></i></th>
                 </tr>
               ))}
             </tbody>

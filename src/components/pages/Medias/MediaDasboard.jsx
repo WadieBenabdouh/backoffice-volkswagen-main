@@ -174,7 +174,7 @@ function MediasDashboard() {
                   <td>{data.urlTwo}</td>
                   <td>{data.urlThree}</td>
                   <td>{data.urlBrochure}</td>
-                  <th>ACTION BUTTON</th>
+                  <th><i className="fa-solid fa-circle-dot"></i></th>
                 </tr>
               ))}
             </tbody>
