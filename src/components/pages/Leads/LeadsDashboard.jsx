@@ -61,6 +61,20 @@ function LeadsDashboard() {
   };
   // formCard inputs logging END
 
+    // MODIFY x DELETE BUTTONS
+    const handleModifyClick = (e) => {
+      e.preventDefault();
+      console.log("Modify action triggered");
+      //>> Implement modify logic here
+    };
+  
+    const handleDeleteClick = (e) => {
+      e.preventDefault();
+      console.log("Delete action triggered");
+      //>> Implement delete logic here
+    };
+    // MODIFY x DELETE BUTTONS END
+
   return (
     <>
       <section className={`${classes.LeadsDashboard}`}>
@@ -69,8 +83,8 @@ function LeadsDashboard() {
         <form onSubmit={handleFormSubmit}>
           <div className={`${classes.buttons}`}>
             <button onClick={handleAddContentClick}>Ajouter contenu</button>
-            <button>Modifier</button>
-            <button>Supprimer</button>
+            <button onClick={handleModifyClick}>Modifier</button>
+            <button onClick={handleDeleteClick}>Supprimer</button>
           </div>
 
           {isFormVisible && (

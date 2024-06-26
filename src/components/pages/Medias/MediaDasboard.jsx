@@ -20,7 +20,7 @@ function MediasDashboard() {
     urlOne: "",
     urlTwo: "",
     urlThree: "",
-    urlBrochure: ""
+    urlBrochure: "",
   });
   const [tableData, setTableData] = useState([]);
 
@@ -33,7 +33,6 @@ function MediasDashboard() {
     };
     fetchData();
   }, []);
-
   // --useEffect for firestore end
 
   const handleInputChange = (e) => {
@@ -54,7 +53,7 @@ function MediasDashboard() {
         urlOne: "",
         urlTwo: "",
         urlThree: "",
-        urlBrochure: ""
+        urlBrochure: "",
       });
 
       const querySnapshot = await getDocs(collection(firestore, "medias"));
@@ -65,6 +64,20 @@ function MediasDashboard() {
   };
   // formCard inputs logging END
 
+  // MODIFY x DELETE BUTTONS
+  const handleModifyClick = (e) => {
+    e.preventDefault();
+    console.log("Modify action triggered");
+    //>> Implement modify logic here
+  };
+
+  const handleDeleteClick = (e) => {
+    e.preventDefault();
+    console.log("Delete action triggered");
+    //>> Implement delete logic here
+  };
+  // MODIFY x DELETE BUTTONS END
+
   return (
     <>
       <section className={`${classes.MediasDashboard}`}>
@@ -73,8 +86,8 @@ function MediasDashboard() {
         <form onSubmit={handleFormSubmit}>
           <div className={`${classes.buttons}`}>
             <button onClick={handleAddContentClick}>Ajouter contenu</button>
-            <button>Modifier</button>
-            <button>Supprimer</button>
+            <button onClick={handleModifyClick}>Modifier</button>
+            <button onClick={handleDeleteClick}>Supprimer</button>
           </div>
 
           {isFormVisible && (
