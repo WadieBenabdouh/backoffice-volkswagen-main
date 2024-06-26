@@ -18,7 +18,7 @@ function LeadsDashboard() {
     phoneNumber: "",
     lastNameLeads: "",
     firstNameLeads: "",
-    desiredModel: ""
+    desiredModel: "",
   });
   const [tableData, setTableData] = useState([]);
 
@@ -50,7 +50,7 @@ function LeadsDashboard() {
         phoneNumber: "",
         lastNameLeads: "",
         firstNameLeads: "",
-        desiredModel: ""
+        desiredModel: "",
       });
 
       const querySnapshot = await getDocs(collection(firestore, "leads"));
@@ -61,19 +61,19 @@ function LeadsDashboard() {
   };
   // formCard inputs logging END
 
-    // MODIFY x DELETE BUTTONS
-    const handleModifyClick = (e) => {
-      e.preventDefault();
-      console.log("Modify action triggered");
-      //>> Implement modify logic here
-    };
-  
-    const handleDeleteClick = (e) => {
-      e.preventDefault();
-      console.log("Delete action triggered");
-      //>> Implement delete logic here
-    };
-    // MODIFY x DELETE BUTTONS END
+  // MODIFY x DELETE BUTTONS
+  const handleModifyClick = (e) => {
+    e.preventDefault();
+    console.log("Modify action triggered");
+    //>> Implement modify logic here
+  };
+
+  const handleDeleteClick = (e) => {
+    e.preventDefault();
+    console.log("Delete action triggered");
+    //>> Implement delete logic here
+  };
+  // MODIFY x DELETE BUTTONS END
 
   return (
     <>
@@ -149,7 +149,9 @@ function LeadsDashboard() {
                   <td>{data.lastNameLeads}</td>
                   <td>{data.firstNameLeads}</td>
                   <td>{data.desiredModel}</td>
-                  <th><i className="fa-solid fa-circle-dot"></i></th>
+                  <th>
+                    <i className="fa-solid fa-circle-dot"></i>
+                  </th>
                 </tr>
               ))}
             </tbody>

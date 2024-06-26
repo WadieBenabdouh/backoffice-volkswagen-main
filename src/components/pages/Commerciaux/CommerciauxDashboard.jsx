@@ -52,7 +52,7 @@ function CommerciauxDashboard() {
         concession: "",
         lastName: "",
         firstName: "",
-        mailChef: ""
+        mailChef: "",
       });
 
       const querySnapshot = await getDocs(collection(firestore, "commerciaux"));
@@ -66,24 +66,24 @@ function CommerciauxDashboard() {
       concession: "",
       lastName: "",
       firstName: "",
-      mailChef: ""
+      mailChef: "",
     });
   };
   // formCard inputs logging END
 
-    // MODIFY x DELETE BUTTONS
-    const handleModifyClick = (e) => {
-      e.preventDefault();
-      console.log("Modify action triggered");
-      //>> Implement modify logic here
-    };
-  
-    const handleDeleteClick = (e) => {
-      e.preventDefault();
-      console.log("Delete action triggered");
-      //>> Implement delete logic here
-    };
-    // MODIFY x DELETE BUTTONS END
+  // MODIFY x DELETE BUTTONS
+  const handleModifyClick = (e) => {
+    e.preventDefault();
+    console.log("Modify action triggered");
+    //>> Implement modify logic here
+  };
+
+  const handleDeleteClick = (e) => {
+    e.preventDefault();
+    console.log("Delete action triggered");
+    //>> Implement delete logic here
+  };
+  // MODIFY x DELETE BUTTONS END
 
   return (
     <>
@@ -170,7 +170,9 @@ function CommerciauxDashboard() {
                   <td>{data.lastName}</td>
                   <td>{data.firstName}</td>
                   <td>{data.mailChef}</td>
-                  <th><i className="fa-solid fa-circle-dot"></i></th>
+                  <th>
+                    <i className="fa-solid fa-circle-dot"></i>
+                  </th>
                 </tr>
               ))}
             </tbody>
