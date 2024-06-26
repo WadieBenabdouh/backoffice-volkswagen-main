@@ -10,12 +10,41 @@ function LeadsDashboard() {
   };
   // TOGGLE formCard visibility form Leads END
 
+  // formCard inputs logging
+  const [formData, setFormData] = useState({
+    phoneNumber: "",
+    lastNameLeads: "",
+    firstNameLeads: "",
+    desiredModel: "",
+  });
+  const [tableData, setTableData] = useState([]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setTableData((prevData) => [...prevData, formData]);
+    setFormData({
+      phoneNumber: "",
+      lastNameLeads: "",
+      firstNameLeads: "",
+      desiredModel: "",
+    });
+  };
+  // formCard inputs logging END
+
   return (
     <>
       <section className={`${classes.LeadsDashboard}`}>
         <h2>Leads</h2>
 
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div className={`${classes.buttons}`}>
             <button onClick={handleAddContentClick}>Ajouter contenu</button>
             <button>Modifier</button>
@@ -26,17 +55,41 @@ function LeadsDashboard() {
             <section className={`${classes.formCard}`}>
               <h3>Ajouter un lead</h3>
 
-              <label htmlFor="phone-number">Numéro de Téléphone:</label>
-              <input type="number" />
+              <label htmlFor="phoneNumber">Numéro de Téléphone:</label>
+              <input
+                id="phoneNumber"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleInputChange}
+                type="number"
+              />
 
-              <label htmlFor="lastName">Nom:</label>
-              <input type="text" />
+              <label htmlFor="lastNameLeads">Nom:</label>
+              <input
+                id="lastNameLeads"
+                name="lastNameLeads"
+                value={formData.lastNameLeads}
+                onChange={handleInputChange}
+                type="text"
+              />
 
-              <label htmlFor="firstName">Prénom:</label>
-              <input type="text" />
+              <label htmlFor="firstNameLeads">Prénom:</label>
+              <input
+                id="firstNameLeads"
+                name="firstNameLeads"
+                value={formData.firstNameLeads}
+                onChange={handleInputChange}
+                type="text"
+              />
 
               <label htmlFor="desiredModel">Modèle Souhaité:</label>
-              <input type="text" />
+              <input
+                id="desiredModel"
+                name="desiredModel"
+                value={formData.desiredModel}
+                onChange={handleInputChange}
+                type="text"
+              />
 
               <button type="submit">Enregistrer</button>
             </section>
@@ -54,13 +107,15 @@ function LeadsDashboard() {
             </thead>
 
             <tbody id="leadsfilledDataTable">
-              <tr>
-                <th>test</th>
-                <th>test</th>
-                <th>test</th>
-                <th>test</th>
-                <th>ACTION BUTTON</th>
-              </tr>
+              {tableData.map((data, index) => (
+                <tr key={{ index }}>
+                  <td>{data.phoneNumber}</td>
+                  <td>{data.lastNameLeads}</td>
+                  <td>{data.firstNameLeads}</td>
+                  <td>{data.desiredModel}</td>
+                  <th>ACTION BUTTON</th>
+                </tr>
+              ))}
             </tbody>
           </table>
         </form>
