@@ -174,7 +174,7 @@ function MediasDashboard() {
                   <td>{data.urlTwo}</td>
                   <td>{data.urlThree}</td>
                   <td>{data.urlBrochure}</td>
-                  <th>
+                  <th className={`${classes.actionCell}`}>
                     <i className="fa-solid fa-pencil"></i>
                     <i className="fa-solid fa-trash"></i>
                   </th>

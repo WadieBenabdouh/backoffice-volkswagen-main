@@ -149,7 +149,7 @@ function CampagnesDashboard() {
                   <td>{data.startDate}</td>
                   <td>{data.endDate}</td>
                   <td>{data.urlImageCampagne}</td>
-                  <th>
+                  <th className={`${classes.actionCell}`}>
                     <i className="fa-solid fa-pencil"></i>
                     <i className="fa-solid fa-trash"></i>
                   </th>

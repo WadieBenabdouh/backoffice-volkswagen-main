@@ -170,7 +170,7 @@ function CommerciauxDashboard() {
                   <td>{data.lastName}</td>
                   <td>{data.firstName}</td>
                   <td>{data.mailChef}</td>
-                  <th>
+                  <th className={`${classes.actionCell}`}>
                     <i className="fa-solid fa-pencil"></i>
                     <i className="fa-solid fa-trash"></i>
                   </th>

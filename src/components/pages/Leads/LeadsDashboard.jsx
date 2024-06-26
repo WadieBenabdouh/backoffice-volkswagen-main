@@ -149,7 +149,7 @@ function LeadsDashboard() {
                   <td>{data.lastNameLeads}</td>
                   <td>{data.firstNameLeads}</td>
                   <td>{data.desiredModel}</td>
-                  <th>
+                  <th className={`${classes.actionCell}`}>
                     <i className="fa-solid fa-pencil"></i>
                     <i className="fa-solid fa-trash"></i>
                   </th>

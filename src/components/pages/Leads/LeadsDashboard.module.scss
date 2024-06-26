@@ -80,6 +80,18 @@ $dark-blue: #0B1423;
                     }
                 }
             }
+
+            tbody {
+
+                .actionCell {
+                    background-color: rgb(204, 204, 204);
+
+                    i {
+                        margin: 0 5px;
+                    }
+
+                }
+            }
         }
     }
 }
