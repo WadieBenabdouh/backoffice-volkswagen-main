@@ -107,13 +107,15 @@ function CampagnesDashboard() {
             </thead>
 
             <tbody id="campagnesfilledDataTable">
-              <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>ACTION BUTTON</th>
-              </tr>
+              {tableData.map((data, index) => (
+                <tr key={{ index }}>
+                  <td>{data.campagneID}</td>
+                  <td>{data.startDate}</td>
+                  <td>{data.endDate}</td>
+                  <td>{data.urlImageCampagne}</td>
+                  <th>ACTION BUTTON</th>
+                </tr>
+              ))}
             </tbody>
           </table>
         </form>
