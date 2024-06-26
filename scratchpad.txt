@@ -215,3 +215,5 @@ export default MediasDashboard;
 
 By integrating Firebase this way, you ensure that your form data is securely stored and can be accessed from anywhere while maintaining the integrity of data between different tabs and components within your React application. This approach leverages Firebase's real-time capabilities to keep your application data synchronized and consistent.
 ---------------------------------------
+
+SCRATCHPAD helped as well
