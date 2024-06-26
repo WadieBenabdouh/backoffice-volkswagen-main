@@ -10,12 +10,41 @@ function CampagnesDashboard() {
   };
   // TOGGLE formCard visibility form Campagnes END
 
+  // formCard inputs logging
+  const [formData, setFormData] = useState({
+    campagneID: "",
+    startDate: "",
+    endDate: "",
+    urlImageCampagne: "",
+  });
+  const [tableData, setTableData] = useState([]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setTableData((prevData) => [...prevData, formData]);
+    setFormData({
+      campagneID: "",
+      startDate: "",
+      endDate: "",
+      urlImageCampagne: "",
+    });
+  };
+  // formCard inputs logging END
+
   return (
     <>
       <section className={`${classes.CampagnesDashboard}`}>
         <h2>Campagnes</h2>
 
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div className={`${classes.buttons}`}>
             <button onClick={handleAddContentClick}>Ajouter contenu</button>
             <button>Modifier</button>
@@ -26,17 +55,41 @@ function CampagnesDashboard() {
             <section className={`${classes.formCard}`}>
               <h3>Ajouter une campagne</h3>
 
-              <label htmlFor="ID-Campagne">ID Campagne:</label>
-              <input type="text" />
+              <label htmlFor="campagneID">ID Campagne:</label>
+              <input
+                id="campagneID"
+                name="campagneID"
+                value={formData.campagneID}
+                onChange={handleInputChange}
+                type="text"
+              />
 
               <label htmlFor="startDate">Date de Début:</label>
-              <input type="date" />
+              <input
+                id="startDate"
+                name="startDate"
+                value={formData.startDate}
+                onChange={handleInputChange}
+                type="date"
+              />
 
-              <label htmlFor="endDate">Date de Fin::</label>
-              <input type="date" />
+              <label htmlFor="endDate">Date de Fin:</label>
+              <input
+                id="endDate"
+                name="endDate"
+                value={formData.endDate}
+                onChange={handleInputChange}
+                type="date"
+              />
 
-              <label htmlFor="url-image">URL Image:</label>
-              <input type="text" />
+              <label htmlFor="urlImageCampagne">URL Image:</label>
+              <input
+                id="urlImageCampagne"
+                name="urlImageCampagne"
+                value={formData.urlImageCampagne}
+                onChange={handleInputChange}
+                type="text"
+              />
 
               <button type="submit">Enregistrer</button>
             </section>
@@ -55,10 +108,10 @@ function CampagnesDashboard() {
 
             <tbody id="campagnesfilledDataTable">
               <tr>
-                <th>test</th>
-                <th>test</th>
-                <th>test</th>
-                <th>test</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
                 <th>ACTION BUTTON</th>
               </tr>
             </tbody>
