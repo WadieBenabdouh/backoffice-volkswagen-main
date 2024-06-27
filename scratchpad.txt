@@ -1,5 +1,5 @@
 TODO No need for a sign up page, Mehdi told me we will manually create accounts for them in Firebase */}
 
-TODO Remove Modifier/Supprimer buttons as they were replace using action buttons
+TODO Craft the logic for the action buttons, edit/delete
 
 TODO Add React Routes
