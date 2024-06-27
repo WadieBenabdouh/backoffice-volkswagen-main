@@ -1,5 +1,5 @@
 import "./App.module.scss";
-import Login from "./components/Auth/Login/Login";
+// import Login from "./components/Auth/Login/Login";
 // import Signup from "./components/Auth/Signup/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
 
