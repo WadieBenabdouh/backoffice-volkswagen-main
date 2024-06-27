@@ -1,34 +1,22 @@
-import classes from "./Login.module.scss";
+import classes from "./Signup.module.scss";
 import { useState } from "react";
 import { auth } from "../../../../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 // LOGIN
-const Login = () => {
+const Signup = () => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
 
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
+        // Signed up
         const user = userCredential.user;
-
-        // Get ID token
-        user
-          .getIdToken(/* forceRefresh */ true)
-          .then(function (idToken) {
-            console.log("Firebase ID Token:", idToken); // Use this token in Postman
-          })
-          .catch(function (error) {
-            console.error("Error getting ID token:", error);
-          });
-
-        //added these myself
-        console.log("success logging in");
+        console.log("success signing up");
         console.log(user);
       })
       .catch((error) => {
@@ -40,7 +28,7 @@ const Login = () => {
 
   return (
     <>
-      <form onSubmit={handleLogin} className={`${classes.loginForm}`}>
+      <form onSubmit={handleSignup} className={`${classes.signupForm}`}>
         <input
           placeholder="Votre email"
           type="email"
@@ -56,11 +44,11 @@ const Login = () => {
           id="passwordLogin"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Se Connecter</button>
+        <button type="submit">Creer un compte</button>
         {error && <span>Votre mail ou mot de passe est incorrect!</span>}
       </form>
     </>
   );
 };
 
-export default Login;
+export default Signup;
