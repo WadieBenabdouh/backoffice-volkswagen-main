@@ -3,6 +3,7 @@ import { useState } from "react";
 import { auth } from "../../../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
+// LOGIN
 const Login = () => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
@@ -15,12 +16,15 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        console.log("success logging in");
         console.log(user);
       })
       .catch((error) => {
         setError(true);
+        console.error("Login failed:", error);
       });
   };
+  // LOGIN
 
   return (
     <>
