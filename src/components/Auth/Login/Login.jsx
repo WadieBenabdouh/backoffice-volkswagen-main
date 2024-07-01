@@ -1,13 +1,16 @@
 import classes from "./Login.module.scss";
-import { useState } from "react";
 import { auth } from "../../../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types'; // Import prop-types
 
 // LOGIN
-const Login = () => {
+const Login = ({onLoginSuccess}) => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -22,6 +25,8 @@ const Login = () => {
           .getIdToken(/* forceRefresh */ true)
           .then(function (idToken) {
             console.log("Firebase ID Token:", idToken); // Use this token in Postman
+            onLoginSuccess();
+            navigate('/dashboard');
           })
           .catch(function (error) {
             console.error("Error getting ID token:", error);
@@ -63,4 +68,9 @@ const Login = () => {
   );
 };
 
+
+
+Login.propTypes = {
+  onLoginSuccess: PropTypes.func.isRequired // Validate the onLoginSuccess prop
+};
 export default Login;
