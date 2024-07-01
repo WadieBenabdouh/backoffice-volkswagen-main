@@ -5,6 +5,7 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 import firestore from "../../../../firebase";
 
 function MediasDashboard() {
+  
   // TOGGLE formCard visibility form Medias
   const [isFormVisible, setIsFormVisible] = useState(false);
   const handleAddContentClick = (e) => {
